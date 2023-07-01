@@ -1,0 +1,412 @@
+object MainForm: TMainForm
+  Left = 385
+  Height = 500
+  Top = 201
+  Width = 550
+  Caption = 'MainForm'
+  ClientHeight = 500
+  ClientWidth = 550
+  Constraints.MinHeight = 500
+  Constraints.MinWidth = 550
+  KeyPreview = True
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnKeyDown = FormKeyDown
+  OnResize = FormResize
+  Position = poDesktopCenter
+  LCLVersion = '2.2.2.0'
+  object Panel1: TPanel
+    Left = 6
+    Height = 407
+    Top = 61
+    Width = 538
+    Align = alClient
+    BorderSpacing.Around = 6
+    BevelOuter = bvNone
+    Caption = 'Panel1'
+    ClientHeight = 407
+    ClientWidth = 538
+    TabOrder = 0
+    object RadioList: TDrawList
+      Left = 0
+      Height = 407
+      Top = 0
+      Width = 538
+      Align = alClient
+      BorderStyle = bsSingle
+      DesktopFont = True
+      HotTrack = False
+      ItemHeight = 64
+      MultiSelect = False
+      ParentColor = False
+      TabOrder = 0
+      OnDblClick = RadioListDblClick
+      OnDrawItem = RadioListDrawItem
+      OnSelectItem = RadioListSelectItem
+    end
+  end
+  object PnlTop: TBCPanel
+    Left = 6
+    Height = 33
+    Top = 14
+    Width = 538
+    Align = alTop
+    BorderSpacing.Top = 8
+    BorderSpacing.Bottom = 8
+    BorderSpacing.Around = 6
+    Background.Color = clBtnFace
+    Background.Gradient1.StartColor = clWhite
+    Background.Gradient1.EndColor = 15855597
+    Background.Gradient1.GradientType = gtLinear
+    Background.Gradient1.Point1XPercent = 0
+    Background.Gradient1.Point1YPercent = 0
+    Background.Gradient1.Point2XPercent = 0
+    Background.Gradient1.Point2YPercent = 100
+    Background.Gradient2.StartColor = clWhite
+    Background.Gradient2.EndColor = clBlack
+    Background.Gradient2.GradientType = gtLinear
+    Background.Gradient2.Point1XPercent = 0
+    Background.Gradient2.Point1YPercent = 0
+    Background.Gradient2.Point2XPercent = 0
+    Background.Gradient2.Point2YPercent = 100
+    Background.Gradient1EndPercent = 100
+    Background.Style = bbsColor
+    BevelInner = bvNone
+    BevelOuter = bvNone
+    BevelWidth = 1
+    Border.Color = clScrollBar
+    Border.Style = bboSolid
+    BorderBCStyle = bpsBorder
+    FontEx.Color = clDefault
+    FontEx.FontQuality = fqSystemClearType
+    FontEx.Shadow = False
+    FontEx.ShadowRadius = 5
+    FontEx.ShadowOffsetX = 5
+    FontEx.ShadowOffsetY = 5
+    FontEx.Style = []
+    ParentBackground = False
+    Rounding.RoundX = 1
+    Rounding.RoundY = 1
+    TabOrder = 1
+    object BCButton11: TBCButton
+      Left = 4
+      Height = 25
+      Top = 4
+      Width = 28
+      Action = actPlayPause
+      Align = alLeft
+      StateClicked.Background.Color = clHighlight
+      StateClicked.Background.ColorOpacity = 120
+      StateClicked.Background.Gradient1.StartColor = 15981500
+      StateClicked.Background.Gradient1.EndColor = 16312531
+      StateClicked.Background.Gradient1.GradientType = gtLinear
+      StateClicked.Background.Gradient1.Point1XPercent = 0
+      StateClicked.Background.Gradient1.Point1YPercent = 0
+      StateClicked.Background.Gradient1.Point2XPercent = 0
+      StateClicked.Background.Gradient1.Point2YPercent = 100
+      StateClicked.Background.Gradient2.StartColor = 16113605
+      StateClicked.Background.Gradient2.EndColor = 15981500
+      StateClicked.Background.Gradient2.GradientType = gtLinear
+      StateClicked.Background.Gradient2.Point1XPercent = 0
+      StateClicked.Background.Gradient2.Point1YPercent = 0
+      StateClicked.Background.Gradient2.Point2XPercent = 0
+      StateClicked.Background.Gradient2.Point2YPercent = 100
+      StateClicked.Background.Gradient1EndPercent = 100
+      StateClicked.Background.Style = bbsColor
+      StateClicked.Border.Color = clHighlight
+      StateClicked.Border.ColorOpacity = 200
+      StateClicked.Border.LightColor = clHighlight
+      StateClicked.Border.LightOpacity = 128
+      StateClicked.Border.Style = bboSolid
+      StateClicked.FontEx.Color = clMenuText
+      StateClicked.FontEx.FontQuality = fqSystemClearType
+      StateClicked.FontEx.Height = 11
+      StateClicked.FontEx.Name = 'Verdana'
+      StateClicked.FontEx.Shadow = False
+      StateClicked.FontEx.ShadowRadius = 5
+      StateClicked.FontEx.ShadowOffsetX = 5
+      StateClicked.FontEx.ShadowOffsetY = 5
+      StateClicked.FontEx.Style = []
+      StateHover.Background.Gradient1.StartColor = clHighlight
+      StateHover.Background.Gradient1.StartColorOpacity = 100
+      StateHover.Background.Gradient1.EndColor = clMenuBar
+      StateHover.Background.Gradient1.EndColorOpacity = 75
+      StateHover.Background.Gradient1.GradientType = gtLinear
+      StateHover.Background.Gradient1.Point1XPercent = 0
+      StateHover.Background.Gradient1.Point1YPercent = 0
+      StateHover.Background.Gradient1.Point2XPercent = 0
+      StateHover.Background.Gradient1.Point2YPercent = 100
+      StateHover.Background.Gradient2.StartColor = clHighlight
+      StateHover.Background.Gradient2.StartColorOpacity = 0
+      StateHover.Background.Gradient2.DrawMode = dmDrawWithTransparency
+      StateHover.Background.Gradient2.EndColor = clMenuBar
+      StateHover.Background.Gradient2.EndColorOpacity = 0
+      StateHover.Background.Gradient2.ColorCorrection = False
+      StateHover.Background.Gradient2.GradientType = gtLinear
+      StateHover.Background.Gradient2.Point1XPercent = 0
+      StateHover.Background.Gradient2.Point1YPercent = 0
+      StateHover.Background.Gradient2.Point2XPercent = 0
+      StateHover.Background.Gradient2.Point2YPercent = 100
+      StateHover.Background.Gradient1EndPercent = 100
+      StateHover.Background.Style = bbsGradient
+      StateHover.Border.Color = clHighlight
+      StateHover.Border.ColorOpacity = 200
+      StateHover.Border.LightColor = clHighlight
+      StateHover.Border.LightOpacity = 128
+      StateHover.Border.Style = bboSolid
+      StateHover.FontEx.Color = clMenuText
+      StateHover.FontEx.FontQuality = fqSystemClearType
+      StateHover.FontEx.Height = 11
+      StateHover.FontEx.Name = 'Verdana'
+      StateHover.FontEx.Shadow = False
+      StateHover.FontEx.ShadowRadius = 5
+      StateHover.FontEx.ShadowOffsetX = 5
+      StateHover.FontEx.ShadowOffsetY = 5
+      StateHover.FontEx.Style = []
+      StateNormal.Background.Color = clMenu
+      StateNormal.Background.Gradient1.StartColor = clMenuBar
+      StateNormal.Background.Gradient1.EndColor = clMenuBar
+      StateNormal.Background.Gradient1.GradientType = gtLinear
+      StateNormal.Background.Gradient1.Point1XPercent = 0
+      StateNormal.Background.Gradient1.Point1YPercent = 0
+      StateNormal.Background.Gradient1.Point2XPercent = 0
+      StateNormal.Background.Gradient1.Point2YPercent = 100
+      StateNormal.Background.Gradient2.StartColor = clMenuBar
+      StateNormal.Background.Gradient2.EndColor = clMenuBar
+      StateNormal.Background.Gradient2.GradientType = gtLinear
+      StateNormal.Background.Gradient2.Point1XPercent = 0
+      StateNormal.Background.Gradient2.Point1YPercent = 0
+      StateNormal.Background.Gradient2.Point2XPercent = 0
+      StateNormal.Background.Gradient2.Point2YPercent = 100
+      StateNormal.Background.Gradient1EndPercent = 100
+      StateNormal.Background.Style = bbsColor
+      StateNormal.Border.Color = 13816015
+      StateNormal.Border.LightWidth = 1
+      StateNormal.Border.Style = bboNone
+      StateNormal.FontEx.Color = clMenuText
+      StateNormal.FontEx.FontQuality = fqSystemClearType
+      StateNormal.FontEx.Height = 11
+      StateNormal.FontEx.Name = 'Verdana'
+      StateNormal.FontEx.Shadow = False
+      StateNormal.FontEx.ShadowRadius = 5
+      StateNormal.FontEx.ShadowOffsetX = 5
+      StateNormal.FontEx.ShadowOffsetY = 5
+      StateNormal.FontEx.Style = []
+      BorderSpacing.Around = 4
+      Color = clNone
+      DropDownWidth = 16
+      DropDownArrowSize = 8
+      GlobalOpacity = 255
+      GlyphMargin = 4
+      ParentColor = False
+      Rounding.RoundX = 2
+      Rounding.RoundY = 2
+      RoundingDropDown.RoundX = 1
+      RoundingDropDown.RoundY = 1
+      TextApplyGlobalOpacity = False
+      Images = ToolBarImg
+      ImageIndex = 0
+      ShowCaption = False
+      MemoryUsage = bmuHigh
+    end
+    object Bevel1: TBevel
+      Left = 36
+      Height = 29
+      Top = 2
+      Width = 2
+      Align = alLeft
+      BorderSpacing.Top = 2
+      BorderSpacing.Bottom = 2
+      Shape = bsLeftLine
+    end
+    object Slider1: TSlider
+      Left = 456
+      Height = 17
+      Top = 8
+      Width = 74
+      Align = alRight
+      BorderSpacing.Left = 4
+      BorderSpacing.Top = 4
+      BorderSpacing.Right = 4
+      BorderSpacing.Bottom = 4
+      BorderSpacing.Around = 4
+      OnMouseEnter = Slider1MouseEnter
+      OnMouseLeave = Slider1MouseLeave
+      Position = 100
+      Vertical = False
+      Smooth = True
+      BorderRound = 0
+      PositionChanged = Slider1PositionChanged
+    end
+  end
+  object PnlBottom: TBCPanel
+    Left = 6
+    Height = 20
+    Top = 474
+    Width = 538
+    Align = alBottom
+    BorderSpacing.Around = 6
+    Background.Color = clBtnFace
+    Background.Gradient1.StartColor = clWhite
+    Background.Gradient1.EndColor = clBlack
+    Background.Gradient1.GradientType = gtLinear
+    Background.Gradient1.Point1XPercent = 0
+    Background.Gradient1.Point1YPercent = 0
+    Background.Gradient1.Point2XPercent = 0
+    Background.Gradient1.Point2YPercent = 100
+    Background.Gradient2.StartColor = clWhite
+    Background.Gradient2.EndColor = clBlack
+    Background.Gradient2.GradientType = gtLinear
+    Background.Gradient2.Point1XPercent = 0
+    Background.Gradient2.Point1YPercent = 0
+    Background.Gradient2.Point2XPercent = 0
+    Background.Gradient2.Point2YPercent = 100
+    Background.Gradient1EndPercent = 35
+    Background.Style = bbsColor
+    BevelInner = bvNone
+    BevelOuter = bvNone
+    BevelWidth = 1
+    Border.Color = clScrollBar
+    Border.Style = bboSolid
+    BorderBCStyle = bpsBorder
+    FontEx.Color = clDefault
+    FontEx.FontQuality = fqFineAntialiasing
+    FontEx.Shadow = False
+    FontEx.ShadowRadius = 5
+    FontEx.ShadowOffsetX = 5
+    FontEx.ShadowOffsetY = 5
+    FontEx.Style = []
+    ParentBackground = False
+    Rounding.RoundX = 1
+    Rounding.RoundY = 1
+    TabOrder = 2
+    object BCLabel1: TBCLabel
+      Left = 4
+      Height = 20
+      Top = 0
+      Width = 530
+      Align = alClient
+      Background.Gradient1.StartColor = clWhite
+      Background.Gradient1.EndColor = clBlack
+      Background.Gradient1.GradientType = gtLinear
+      Background.Gradient1.Point1XPercent = 0
+      Background.Gradient1.Point1YPercent = 0
+      Background.Gradient1.Point2XPercent = 0
+      Background.Gradient1.Point2YPercent = 100
+      Background.Gradient2.StartColor = clWhite
+      Background.Gradient2.EndColor = clBlack
+      Background.Gradient2.GradientType = gtLinear
+      Background.Gradient2.Point1XPercent = 0
+      Background.Gradient2.Point1YPercent = 0
+      Background.Gradient2.Point2XPercent = 0
+      Background.Gradient2.Point2YPercent = 100
+      Background.Gradient1EndPercent = 35
+      Background.Style = bbsClear
+      Border.Style = bboNone
+      BorderSpacing.Left = 4
+      BorderSpacing.Right = 4
+      Caption = 'BCLabel1'
+      FontEx.Color = clMenuText
+      FontEx.EndEllipsis = True
+      FontEx.FontQuality = fqFineAntialiasing
+      FontEx.Shadow = False
+      FontEx.ShadowRadius = 2
+      FontEx.ShadowOffsetX = 2
+      FontEx.ShadowOffsetY = 2
+      FontEx.Style = []
+      FontEx.TextAlignment = bcaLeftCenter
+      Rounding.RoundX = 1
+      Rounding.RoundY = 1
+    end
+  end
+  object Image: TImageStrip
+    Left = 80
+    Top = 64
+  end
+  object ImagePeak: TImageStrip
+    Left = 80
+    Top = 120
+  end
+  object TrayIcon: TTrayIcon
+    PopUpMenu = TrayMenu
+    Visible = True
+    Left = 168
+    Top = 240
+  end
+  object RenderTimer: TAnimationTimer
+    OnTimer = RenderTimerTimer
+    Left = 80
+    Top = 184
+  end
+  object ToolBarImg: TBGRAImageList
+    Left = 168
+    Top = 120
+    Bitmap = {
+      4C7A060000001000000010000000FE0300000000000078DA6360A00E60E660E3
+      524D779FA09AE13E8155805B9454FDB201E6054E9B6BFE83B0EDF2E23792AEFA
+      F1A4E8578CB46B80E98761C3B698DD9C5242CAE4EA0761877515DFE4C3ACCB18
+      999958C8D10FC36693D3CEF3A94B9990AB1F841D3756FF514D73EB656267E120
+      473F0C2B2738B552A43F9E3CFD94B89FDCF0A324FE48493F94A65F78FE49272F
+      FF0C06D01D26D4FB69AAC21F1006B10989A30390FC97698AFF4118C426248E0E
+      606A609890F8A8FE51FDD4D44F69FAA534FF0C349057EBE93675FAFCC7CCF9EB
+      7F6C1824270754834B3F3EBDC866E0D24F482F0C13D25F50F9F5FFE5AB5FFFAF
+      DDF4F5FF9A8D5FFF5FBAF2F57F7E05F1FA9F3DFFFAFFDBB76F28182446ACFE17
+      2F31F53F7F41BCFE893330F54F9C4EBC7E0BD7AFFFF71D4298B1F720448C58FD
+      206CEBF5F5FFCEBD5FFFEFD803647B9216FE94C61FB5F4EB5A9CBFA2637EEA3C
+      A9FA4D9D3EFE92516E6A62646267636464639556AAAB3575FCF093907E0DA39D
+      BBB44D8F1CE7E635D44797E3E2D5D7D5363D7C4CC368FB8EC198F72D2C2CCC9E
+      3C79F2123DDDA1E35BB76EDD5351515142D7DFD7D73781905E182E28282844D7
+      6F636363F9E5CB97BF84F4BE7AF5EA2336FB41A03D58A81DBDAC47C69F8138C4
+      843B085718B0B330B29DAA95BE804B7F6FB830C1B25B4F864DE7DD64851FE87A
+      F797491E6665666021262E4ADCF98B91F53EEC927B2923C82C456C5C32313230
+      21EBAFF3156C22353D20EBAFF2166818C9FA936C799349D5DF1326DC33375174
+      819D1A870DC310064C4C4C8C20408E5E2B2B2BCB0B172EDC3E7EFCF87952F4B1
+      B2B2B2D4D7D737BD79F3E6CFBB77EFFE8330B17AD5D5D5D50E1E3C780AA68F18
+      FD7248ED9E4DDB3EFC47D70BC29C9C9C425C5C5C22303DC2C2C26AD8DA3DB8F4
+      6B696985A7A6A6DEE2E5E5950296B5A540F6756CF5162EFDD032BA343737F715
+      CC1C6AE9A7D4FD94861FA5F147CDF4438DF44BADFC3390C0458DC3EF7C89C42F
+      1006B189D1E3A5C511966AC15DC6C1C2C0DEE1C33FF75299E47F106EF2E49FC3
+      C1C2C8916AC1530652834DAF37501CA8F61F48FDA942F14F30BD307CAA50E233
+      94FDCF4B9323145D7F8A057729B2FAEBDD76FF1FACAF0563101B590EA416B3EE
+      67603F592801B6F7FEEAF2FFEFDEBE45A43F201B2406923B5928FE11A8960D3D
+      AC1A3DF86781EDEDB201AA7F83990780622039909A366F81B9C8610A0A6398DB
+      EEAFADC29A7F401824075307D28355FF9A4ADCFAD75460D50F720B308E20EEEF
+      B004BAF53516F7BF06CB81D4D4BBF3CF404F136CCC0CACC70BC4DF83E4EF2D2F
+      F8FFEE0D92194036480C2477A240FC03482DA1F8BBD66EFEFFDEAA523006B109
+      C59F1752FA39017507323E962FFE0E5FFA414ABFA5C0761A6B9D3BFF7498DE16
+      4FFE19203783E470A55F6AE41F72000056B9E22E
+    }
+  end
+  object ActionList: TActionList
+    Images = ToolBarImg
+    Left = 168
+    Top = 64
+    object actPlayPause: TAction
+      Category = 'Player'
+      Caption = 'PlayPause'
+      ImageIndex = 0
+      OnExecute = actPlayPauseExecute
+    end
+    object actSortFav: TAction
+      Category = 'Player'
+      AutoCheck = True
+      ImageIndex = 2
+    end
+  end
+  object BufferTimer: TAnimationTimer
+    Left = 80
+    Top = 240
+  end
+  object TrayMenu: TPopupMenu
+    Left = 168
+    Top = 184
+    object MenuItem1: TMenuItem
+      Caption = 'Show'
+      OnClick = MenuItem1Click
+    end
+    object MenuItem2: TMenuItem
+      Caption = 'Exit'
+      OnClick = MenuItem2Click
+    end
+  end
+end
