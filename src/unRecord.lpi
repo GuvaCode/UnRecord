@@ -67,8 +67,12 @@
       <OtherUnitFiles Value="lazradio"/>
       <UnitOutputDirectory Value="../tmp/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
+    <CodeGeneration>
+      <TargetOS Value="win64"/>
+    </CodeGeneration>
     <Linking>
       <Debugging>
+        <GenerateDebugInfo Value="False"/>
         <DebugInfoType Value="dsDwarf3"/>
       </Debugging>
       <Options>

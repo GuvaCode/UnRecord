@@ -6,7 +6,7 @@
     <CompilerOptions>
       <Version Value="11"/>
       <SearchPaths>
-        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)/"/>
+        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
     <Files>
@@ -18,7 +18,7 @@
     </Files>
     <RequiredPkgs>
       <Item>
-        <PackageName Value="codebot_controls_design"/>
+        <PackageName Value="codebot_controls"/>
       </Item>
       <Item>
         <PackageName Value="IDEIntf"/>

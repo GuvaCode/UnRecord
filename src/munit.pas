@@ -58,6 +58,7 @@ type
     RadioList: TDrawList;
     TrayIcon: TTrayIcon;
     procedure actPlayPauseUpdate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var {%H-}Key: Word; {%H-}Shift: TShiftState);
     procedure actPlayPauseExecute(Sender: TObject);
     procedure MenuItem1Click(Sender: TObject);
@@ -119,7 +120,9 @@ end;
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
   FRadioNode := TJsonNode.Create;
+  {$ifdef linux}
   RadioList.Color:= clMenu;
+  {$endif}
   FItemIndex := -1;
   SurfacePeak := TSurfaceBitmap.Create;
   SurfacePeak.SetSize(PeakRect.Width, PeakRect.Height);
@@ -178,10 +181,9 @@ end;
 procedure TMainForm.actPlayPauseUpdate(Sender: TObject);
 begin
   if Assigned(FRadio) then actPlayPause.Enabled:=True else Init;
-
 end;
 
-procedure TMainForm.FormDestroy(Sender: TObject);
+procedure TMainForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   if Assigned(FRadio) then FRadio.Pause;
   RenderTimer.Enabled:=False;
@@ -189,12 +191,16 @@ begin
   if Assigned(FRadioNode) then FRadioNode.Free;
 end;
 
+procedure TMainForm.FormDestroy(Sender: TObject);
+begin
+
+end;
+
 procedure TMainForm.FormResize(Sender: TObject);
 begin
   RadioList.Invalidate;
   PnlTop.Invalidate;
   PnlBottom.Invalidate;
-
 end;
 
 procedure TMainForm.RadioListDblClick(Sender: TObject);
@@ -281,19 +287,26 @@ begin
   R.Right:=PeakRect.Left - 6;
   F := Theme.Font;
   F.Color := clMenuText;
+  {$ifdef linux}
   F.SetSize(11);
+  {$else}
+  F.SetSize(20);
+  {$endif}
   F.Style:=[];
 
   Surface.TextOut(F, FRadioInfo[Index].FTitle, R, drLeft);
   C := clMenuText;
   F.Color := C.Blend(clWindow, 0.25);
   F.Style:=[fsItalic];
+
+  {$ifdef linux}
   F.SetSize(8);
+  {$else}
+  F.SetSize(16);
+  {$endif}
   R.Top:=R.Bottom - 12;
   Surface.TextOut(F, FRadioInfo[Index].FTooltip , R, drLeft);
 end;
-
-
 
 procedure TMainForm.Slider1MouseEnter(Sender: TObject);
 begin
@@ -322,9 +335,14 @@ begin
   F := Theme.Font;
   F.Color := C.Blend(clWindow, 0.15);
   F.Style:=[fsItalic];
+  {$ifdef linux}
   F.SetSize(8);
+  {$else}
+  F.SetSize(16);
+  {$endif}
   Surface.TextOut(F, FCaption , R, drCenter);
 end;
+
 
 procedure TMainForm.FillRadioList;
 var i, j: integer;
@@ -358,34 +376,49 @@ begin
     RadioList.Count:=Length(FRadioInfo);
   end;
   bmp:= TBGRABitmap.Create;
-  Image.Clear;
+  SurfaceBmp := TSurfaceBitmap.Create;
+
   for i:= 0 to RadioList.Count -1 do
   begin
     ms:= TMemoryStream.Create;
-    SurfaceBmp := TSurfaceBitmap.Create;
+
     try
       s:= FRadioInfo[i].FSvg_outline;
       ms.WriteBuffer(s[1],Length(s));
       ms.Position:= 0;
+
       svg:= TBGRASVG.Create(ms);
       svg.ContainerWidthAsPixel := 200;
       svg.ContainerHeightAsPixel := 200;
       bmp.SetSize(Round(svg.WidthAsPixel),Round(svg.HeightAsPixel));
+
       bmp.Fill(clMenuBar);
+
       for j:=0 to svg.Content.ElementCount-1  do
       begin
         if svg.Content.IsSVGElement[j] then svg.Content.Element[j].fillColor := clMenuText;
       end;
       svg.StretchDraw(bmp.Canvas2D, 0,0,bmp.Width,bmp.Height);
+      {$ifdef Linux}
+      SurfaceBmp.SetSize(bmp.Width,bmp.Height);
       SurfaceBmp.Assign(bmp.Bitmap);
       Image.Add(SurfaceBmp);
+      {$else}
+      SurfaceBmp.SetSize(bmp.Width,bmp.Height);
+      SurfaceBmp.Assign(bmp.Bitmap);
+      Image.BeginUpdate;
+      Image.Add(SurfaceBmp);
+      Image.EndUpdate;
+      {$endif}
+
     finally
       svg.Free;
       ms.free;
-      SurfaceBmp.Free;
     end;
   end;
+
   bmp.Free;
+  SurfaceBmp.Free;
 end;
 
 function TMainForm.NodeLoadFromUrl(const Url: string; Node: TJsonNode): Boolean;
