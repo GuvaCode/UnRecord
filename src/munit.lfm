@@ -384,8 +384,10 @@ object MainForm: TMainForm
     object actPlayPause: TAction
       Category = 'Player'
       Caption = 'PlayPause'
+      Enabled = False
       ImageIndex = 0
       OnExecute = actPlayPauseExecute
+      OnUpdate = actPlayPauseUpdate
     end
     object actSortFav: TAction
       Category = 'Player'

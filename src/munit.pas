@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, JsonTools,
   Radio, CommonTypes, LCLType, Menus, ComCtrls, ActnList,
-  opensslsockets, BGRASVG, BGRASVGType, BGRABitmap, BGRABitmapTypes, BCPanel,
+  BGRASVG, BGRASVGType, BGRABitmap, BGRABitmapTypes, BCPanel,
   BCButton, BGRAImageList, BCLabel,
   { Codebot units }
   Codebot.System, Codebot.Graphics, Codebot.Graphics.Types, Codebot.Animation,
@@ -57,6 +57,7 @@ type
     Panel1: TPanel;
     RadioList: TDrawList;
     TrayIcon: TTrayIcon;
+    procedure actPlayPauseUpdate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var {%H-}Key: Word; {%H-}Shift: TShiftState);
     procedure actPlayPauseExecute(Sender: TObject);
     procedure MenuItem1Click(Sender: TObject);
@@ -85,14 +86,17 @@ type
     FFTFallOff : array [0..128] of Integer;
     SurfacePeak: TSurfaceBitmap;
     procedure FillRadioList;
+    function  NodeLoadFromUrl(const Url: string; Node: TJsonNode): Boolean;
   public
+    procedure Init;
   end;
 
 var
   MainForm: TMainForm;
   TmpCount : Integer;
 implementation
- uses Bass;
+uses bass, fphttpclient, opensslsockets;
+
 {$R *.lfm}
 
 procedure StatusProc({%H-}pszData : string;{%H-}Progress:Integer; Channel: HStream);
@@ -113,17 +117,6 @@ end;
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
   FRadioNode := TJsonNode.Create;
-  FRadioNode.LoadFromUrl('https://www.radiorecord.ru/api/stations/');
-  try
-    SetLength(FRadioInfo, FRadioNode.Find('result/stations').Count);
-    FRadio := TRadio.Create;
-    FRadio.SetOwner(Self);
-    FRadio.SetVolume(0.5);
-    FRadio.SetStatusProc(@StatusProc);
-    FRadio.SetBroadcastMetaProc(@BroadcastMetaProc);
-  finally
-    FillRadioList;
-  end;
   RadioList.Color:= clMenu;
   FItemIndex := -1;
   SurfacePeak := TSurfaceBitmap.Create;
@@ -131,6 +124,7 @@ begin
   Slider1.BorderColor := clScrollBar;
   Slider1.BarColor := clScrollBar;
   Slider1.SetParams(0,100,50);
+  Init;
 end;
 
 procedure TMainForm.RenderTimerTimer(Sender: TObject);
@@ -178,9 +172,15 @@ begin
  RadioList.ScrollToSelection;
 end;
 
+procedure TMainForm.actPlayPauseUpdate(Sender: TObject);
+begin
+  if Assigned(FRadio) then actPlayPause.Enabled:=True else Init;
+
+end;
+
 procedure TMainForm.FormDestroy(Sender: TObject);
 begin
-  FRadio.Pause;
+  if Assigned(FRadio) then FRadio.Pause;
   RenderTimer.Enabled:=False;
   if Assigned(FRadio) then FRadio.Free;
   if Assigned(FRadioNode) then FRadioNode.Free;
@@ -364,6 +364,58 @@ begin
     end;
   end;
   bmp.Free;
+end;
+
+function TMainForm.NodeLoadFromUrl(const Url: string; Node: TJsonNode): Boolean;
+var M: TMemoryStream;
+    http: TFPHTTPClient;
+    Load: Boolean;
+begin
+  M := TMemoryStream.Create;
+  http := TFPHTTPClient.Create(nil);
+  http.AllowRedirect:= True;
+  try
+    try
+      http.HTTPMethod('HEAD', URL, nil, []);
+      http.Get(URL,M);
+      M.Position:=0;
+      Node.LoadFromStream(M);
+      Load := True;
+    except
+       on E: Exception do
+       begin
+         if http.ResponseStatusCode > 399 then
+         begin
+           writeln(SysUtils.Format('Status: %d', [http.ResponseStatusCode]));
+           BCLabel1.Caption:= (SysUtils.Format('Status: %d', [http.ResponseStatusCode]));
+           Load := False;
+         end;
+           writeln('Error: ' + E.Message);
+           BCLabel1.Caption:=('Error: ' + E.Message);
+           Load := False;
+       end;
+    end;
+  finally
+    FreeAndNil(M);
+    http.Free;
+    Result := Load;
+  end;
+end;
+
+procedure TMainForm.Init;
+begin
+  if self.NodeLoadFromUrl('https://www.radiorecord.ru/api/stations/',FRadioNode) then
+  try
+    SetLength(FRadioInfo, FRadioNode.Find('result/stations').Count);
+    FRadio := TRadio.Create;
+    FRadio.SetOwner(Self);
+    FRadio.SetVolume(0.5);
+    FRadio.SetStatusProc(@StatusProc);
+    FRadio.SetBroadcastMetaProc(@BroadcastMetaProc);
+  finally
+    FillRadioList;
+  end;
+
 end;
 
 end.
