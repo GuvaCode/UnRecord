@@ -7,7 +7,9 @@
       <Unit>
         <Filename Value="unRecord.lpr"/>
         <IsPartOfProject Value="True"/>
-        <UsageCount Value="27"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="30"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="munit.pas"/>
@@ -16,9 +18,10 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="393"/>
-        <CursorPos X="31" Y="413"/>
-        <UsageCount Value="27"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="233"/>
+        <CursorPos Y="249"/>
+        <UsageCount Value="30"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -33,18 +36,20 @@
       <Unit>
         <Filename Value="../../../Components/CodebotExtra/slider.pas"/>
         <UnitName Value="Slider"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="64"/>
-        <UsageCount Value="13"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="122"/>
+        <CursorPos X="61" Y="134"/>
+        <UsageCount Value="15"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="/usr/share/lazarus/2.2.2/lcl/graphics.pp"/>
         <UnitName Value="Graphics"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="278"/>
-        <CursorPos X="14" Y="291"/>
-        <UsageCount Value="13"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="64"/>
+        <CursorPos X="25" Y="78"/>
+        <UsageCount Value="14"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../../Components/Codebot.Cross-master/source/codebot/codebot.graphics.pas"/>
@@ -57,10 +62,10 @@
       <Unit>
         <Filename Value="../../../Components/Codebot.Cross-master/source/codebot/codebot.graphics.types.pas"/>
         <UnitName Value="Codebot.Graphics.Types"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="23"/>
-        <CursorPos X="56" Y="32"/>
-        <UsageCount Value="13"/>
+        <TopLine Value="281"/>
+        <CursorPos X="21" Y="298"/>
+        <UsageCount Value="14"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="../../LazRadio/test/unit1.pas"/>
@@ -95,133 +100,132 @@
       <Unit>
         <Filename Value="jsontools.pas"/>
         <UnitName Value="JsonTools"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="5"/>
         <TopLine Value="7"/>
         <CursorPos X="50" Y="17"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="185" Column="23" TopLine="171"/>
+        <Caret Line="286" Column="12" TopLine="274"/>
+      </Position>
+      <Position>
+        <Filename Value="../../../Components/Codebot.Cross-master/source/codebot/codebot.graphics.types.pas"/>
+        <Caret Line="620" Column="14" TopLine="607"/>
+      </Position>
+      <Position>
+        <Filename Value="/usr/share/lazarus/2.2.2/lcl/graphics.pp"/>
+        <Caret Line="79" Column="3" TopLine="65"/>
       </Position>
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="184" Column="23" TopLine="170"/>
+        <Caret Line="286" Column="20" TopLine="274"/>
       </Position>
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="380" TopLine="352"/>
+        <Caret Line="281" Column="25" TopLine="266"/>
       </Position>
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="90" TopLine="76"/>
+        <Caret Line="410" Column="12" TopLine="402"/>
       </Position>
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="186" TopLine="144"/>
+        <Caret Line="409" Column="12" TopLine="401"/>
       </Position>
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="132" Column="30" TopLine="119"/>
+        <Caret Line="416" Column="12" TopLine="408"/>
       </Position>
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="175" Column="15" TopLine="172"/>
+        <Caret Line="325" Column="62" TopLine="310"/>
       </Position>
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="111" Column="49" TopLine="96"/>
+        <Caret Line="290" TopLine="275"/>
       </Position>
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="110" Column="49" TopLine="95"/>
+        <Caret Line="321" Column="29" TopLine="307"/>
       </Position>
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="109" Column="49" TopLine="94"/>
+        <Caret Line="411" Column="12" TopLine="393"/>
       </Position>
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="154" TopLine="139"/>
+        <Caret Line="73" Column="2" TopLine="107"/>
       </Position>
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="98" Column="27" TopLine="83"/>
+        <Caret Line="318" Column="14" TopLine="302"/>
       </Position>
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="60" Column="53" TopLine="46"/>
+        <Caret Line="85" Column="13" TopLine="77"/>
       </Position>
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="9" Column="57"/>
+        <Caret Line="114" Column="20" TopLine="102"/>
       </Position>
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="98" Column="49" TopLine="83"/>
+        <Caret Line="325" Column="30" TopLine="310"/>
       </Position>
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="116" Column="70" TopLine="108"/>
+        <Caret Line="81" Column="24" TopLine="74"/>
       </Position>
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="119" Column="29" TopLine="112"/>
-      </Position>
-      <Position>
-        <Filename Value="jsontools.pas"/>
-        <Caret Line="115" Column="25" TopLine="101"/>
+        <Caret Line="321" Column="23" TopLine="307"/>
       </Position>
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="119" Column="11"/>
+        <Caret Line="81" Column="15" TopLine="60"/>
       </Position>
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="89" Column="20" TopLine="74"/>
+        <Caret Line="322" Column="9" TopLine="310"/>
       </Position>
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="88" Column="76" TopLine="79"/>
+        <Caret Line="331" Column="3" TopLine="313"/>
       </Position>
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="397" Column="86" TopLine="383"/>
+        <Caret Line="329" Column="41" TopLine="316"/>
+      </Position>
+      <Position>
+        <Filename Value="unRecord.lpr"/>
       </Position>
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="97" TopLine="87"/>
+        <Caret Line="323" Column="33" TopLine="318"/>
       </Position>
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="101" TopLine="100"/>
+        <Caret Line="81" TopLine="67"/>
       </Position>
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="167" Column="20" TopLine="152"/>
+        <Caret Line="115" TopLine="101"/>
       </Position>
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="179" Column="2" TopLine="152"/>
+        <Caret Line="327" Column="3" TopLine="306"/>
       </Position>
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="182" Column="27" TopLine="167"/>
+        <Caret Line="249" Column="33" TopLine="239"/>
       </Position>
       <Position>
         <Filename Value="munit.pas"/>
-        <Caret Line="177" Column="68" TopLine="391"/>
-      </Position>
-      <Position>
-        <Filename Value="munit.pas"/>
-        <Caret Line="89" Column="30" TopLine="75"/>
-      </Position>
-      <Position>
-        <Filename Value="munit.pas"/>
-        <Caret Line="390" Column="89" TopLine="375"/>
+        <Caret Line="247" Column="41" TopLine="236"/>
       </Position>
     </JumpHistory>
     <RunParams>

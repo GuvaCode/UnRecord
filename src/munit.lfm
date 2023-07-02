@@ -3,7 +3,7 @@ object MainForm: TMainForm
   Height = 500
   Top = 201
   Width = 550
-  Caption = 'MainForm'
+  Caption = 'unRecord'
   ClientHeight = 500
   ClientWidth = 550
   Constraints.MinHeight = 500
@@ -42,7 +42,6 @@ object MainForm: TMainForm
       TabOrder = 0
       OnDblClick = RadioListDblClick
       OnDrawItem = RadioListDrawItem
-      OnSelectItem = RadioListSelectItem
     end
   end
   object PnlTop: TBCPanel
@@ -280,43 +279,13 @@ object MainForm: TMainForm
     Rounding.RoundX = 1
     Rounding.RoundY = 1
     TabOrder = 2
-    object BCLabel1: TBCLabel
-      Left = 4
+    object SongRender: TRenderBox
+      Left = 0
       Height = 20
       Top = 0
-      Width = 530
+      Width = 538
+      OnRender = SongRenderRender
       Align = alClient
-      Background.Gradient1.StartColor = clWhite
-      Background.Gradient1.EndColor = clBlack
-      Background.Gradient1.GradientType = gtLinear
-      Background.Gradient1.Point1XPercent = 0
-      Background.Gradient1.Point1YPercent = 0
-      Background.Gradient1.Point2XPercent = 0
-      Background.Gradient1.Point2YPercent = 100
-      Background.Gradient2.StartColor = clWhite
-      Background.Gradient2.EndColor = clBlack
-      Background.Gradient2.GradientType = gtLinear
-      Background.Gradient2.Point1XPercent = 0
-      Background.Gradient2.Point1YPercent = 0
-      Background.Gradient2.Point2XPercent = 0
-      Background.Gradient2.Point2YPercent = 100
-      Background.Gradient1EndPercent = 35
-      Background.Style = bbsClear
-      Border.Style = bboNone
-      BorderSpacing.Left = 4
-      BorderSpacing.Right = 4
-      Caption = 'BCLabel1'
-      FontEx.Color = clMenuText
-      FontEx.EndEllipsis = True
-      FontEx.FontQuality = fqFineAntialiasing
-      FontEx.Shadow = False
-      FontEx.ShadowRadius = 2
-      FontEx.ShadowOffsetX = 2
-      FontEx.ShadowOffsetY = 2
-      FontEx.Style = []
-      FontEx.TextAlignment = bcaLeftCenter
-      Rounding.RoundX = 1
-      Rounding.RoundY = 1
     end
   end
   object Image: TImageStrip

@@ -28,13 +28,7 @@
         <PackageName Value="CodeBotEx"/>
       </Item>
       <Item>
-        <PackageName Value="SpkToolbarPackage"/>
-      </Item>
-      <Item>
         <PackageName Value="bgracontrols"/>
-      </Item>
-      <Item>
-        <PackageName Value="atflatcontrols_package"/>
       </Item>
       <Item>
         <PackageName Value="BGRABitmapPack"/>

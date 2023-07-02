@@ -8,10 +8,10 @@ uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, JsonTools,
   Radio, CommonTypes, LCLType, Menus, ComCtrls, ActnList,
   BGRASVG, BGRASVGType, BGRABitmap, BGRABitmapTypes, BCPanel,
-  BCButton, BGRAImageList, BCLabel,
+  BCButton, BGRAImageList,
   { Codebot units }
   Codebot.System, Codebot.Graphics, Codebot.Graphics.Types, Codebot.Animation,
-  Codebot.Controls.Scrolling, Slider;
+  Codebot.Controls.Scrolling, Codebot.Controls.Extras, Slider;
 
 const  StatioPath = 'result/stations/';
 
@@ -36,13 +36,13 @@ type
 
   TMainForm = class(TForm)
     BufferTimer: TAnimationTimer;
-    BCLabel1: TBCLabel;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
     PnlBottom: TBCPanel;
     actSortFav: TAction;
     actPlayPause: TAction;
     ActionList: TActionList;
+    SongRender: TRenderBox;
     TrayMenu: TPopupMenu;
     RenderTimer: TAnimationTimer;
     BCButton11: TBCButton;
@@ -70,10 +70,10 @@ type
     procedure RadioListDblClick(Sender: TObject);
     procedure RadioListDrawItem(Sender: TObject; Surface: ISurface;
       Index: Integer; Rect: TRectI; State: TDrawState);
-    procedure RadioListSelectItem(Sender: TObject);
     procedure Slider1MouseEnter(Sender: TObject);
     procedure Slider1MouseLeave(Sender: TObject);
     procedure Slider1PositionChanged(Sender: TObject; NewPos: integer);
+    procedure SongRenderRender(Sender: TObject; Surface: ISurface);
   private
     FRadioInfo: array of RadioInfo;
     FRadioNode: TJsonNode;
@@ -82,6 +82,7 @@ type
     Channel: DWORD;
     PeakRect: TRectI;
     FFTFata : TFFTData;
+    FCaption : String;
     FFTPeacks  : array [0..128] of Integer;
     FFTFallOff : array [0..128] of Integer;
     SurfacePeak: TSurfaceBitmap;
@@ -94,6 +95,7 @@ type
 var
   MainForm: TMainForm;
   TmpCount : Integer;
+
 implementation
 uses bass, fphttpclient, opensslsockets;
 
@@ -109,7 +111,7 @@ end;
 
 procedure BroadcastMetaProc(pszData : string);
 begin
-  MainForm.Caption := Format('%s',[pszData]);
+  MainForm.FCaption := Format('%s',[pszData]);
 end;
 
 { TMainForm }
@@ -133,6 +135,7 @@ begin
   SurfacePeak.SetSize(PeakRect.Width,PeakRect.Height);
   BASS_ChannelGetData(Channel, @FFTFata, BASS_DATA_FFT1024);
   RadioList.Invalidate;
+  SongRender.Invalidate;
 end;
 
 procedure TMainForm.actPlayPauseExecute(Sender: TObject);
@@ -191,6 +194,7 @@ begin
   RadioList.Invalidate;
   PnlTop.Invalidate;
   PnlBottom.Invalidate;
+
 end;
 
 procedure TMainForm.RadioListDblClick(Sender: TObject);
@@ -201,7 +205,7 @@ end;
 
 procedure TMainForm.RadioListDrawItem(Sender: TObject; Surface: ISurface;
   Index: Integer; Rect: TRectI; State: TDrawState);
-var R, RR: TRectF; SelR, ImgRect: TRectI; F: IFont;
+var R, RR: TRectF; SelR, ImgRect: TRectI; F: IFont; C: TColorB;
     P: IPen; i : Integer; Val : Single;  pos : Integer;
 begin
   (* fill back ground *)
@@ -239,8 +243,9 @@ begin
 
     if FFTPeacks[i] < 3 then FFTPeacks[i] := 3;
 
-    P := NewPen(ClGrayText, 1);
-    P.Color.Blend(ClGrayText,1.5);
+    C:=clMenuText;
+    P := NewPen(clMenuText, 1);
+    P.Color := C.Blend(clWindow, 0.50);
     P.LineCap := cpRound;
 
     RR.Left:=i * 4 + i + 1;
@@ -270,20 +275,25 @@ begin
   end;
   (* render text *)
   R := Rect;
-  R.Inflate(-66, 0);
-  R.Bottom := R.Bottom - 4;
+  R.Bottom := R.Bottom - 18;
   R.Top:=R.Top + 4;
+  R.Left:=R.Left+76;
+  R.Right:=PeakRect.Left - 6;
   F := Theme.Font;
   F.Color := clMenuText;
   F.SetSize(11);
-  R.Left:=R.Left+10;
+  F.Style:=[];
+
   Surface.TextOut(F, FRadioInfo[Index].FTitle, R, drLeft);
+  C := clMenuText;
+  F.Color := C.Blend(clWindow, 0.25);
+  F.Style:=[fsItalic];
+  F.SetSize(8);
+  R.Top:=R.Bottom - 12;
+  Surface.TextOut(F, FRadioInfo[Index].FTooltip , R, drLeft);
 end;
 
-procedure TMainForm.RadioListSelectItem(Sender: TObject);
-begin
-  BCLabel1.Caption := FRadioInfo[RadioList.ItemIndex].FTooltip;
-end;
+
 
 procedure TMainForm.Slider1MouseEnter(Sender: TObject);
 begin
@@ -302,6 +312,18 @@ begin
 Slider1.BorderColor := clHighlight;
 Slider1.BarColor := clHighlight;
 FRadio.SetVolume(NewPos/100);
+end;
+
+procedure TMainForm.SongRenderRender(Sender: TObject; Surface: ISurface);
+var R: TRectF; C: TColorB; F: IFont;
+begin
+  R := SongRender.ClientRect;
+  C := clMenuText;
+  F := Theme.Font;
+  F.Color := C.Blend(clWindow, 0.15);
+  F.Style:=[fsItalic];
+  F.SetSize(8);
+  Surface.TextOut(F, FCaption , R, drCenter);
 end;
 
 procedure TMainForm.FillRadioList;
@@ -387,12 +409,13 @@ begin
          if http.ResponseStatusCode > 399 then
          begin
            writeln(SysUtils.Format('Status: %d', [http.ResponseStatusCode]));
-           BCLabel1.Caption:= (SysUtils.Format('Status: %d', [http.ResponseStatusCode]));
+           FCaption:= (SysUtils.Format('Status: %d', [http.ResponseStatusCode]));
            Load := False;
          end;
            writeln('Error: ' + E.Message);
-           BCLabel1.Caption:=('Error: ' + E.Message);
+           FCaption:=('Error: ' + E.Message);
            Load := False;
+       SongRender.Invalidate;
        end;
     end;
   finally
