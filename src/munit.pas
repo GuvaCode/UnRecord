@@ -30,6 +30,7 @@ type
     FNew: boolean;
     FStream_64: string;
     FStream_128: string;
+    FListPicture: TSurfaceBitmap;
   end;
 
   { TMainForm }
@@ -49,11 +50,7 @@ type
     PnlTop: TBCPanel;
     Bevel1: TBevel;
     Slider1: TSlider;
-
     ToolBarImg: TBGRAImageList;
-    Image: TImageStrip;
-    ImagePeak: TImageStrip;
-    ImageFav: TImageStrip;
     Panel1: TPanel;
     RadioList: TDrawList;
     TrayIcon: TTrayIcon;
@@ -77,6 +74,7 @@ type
     procedure SongRenderRender(Sender: TObject; Surface: ISurface);
   private
     FRadioInfo: array of RadioInfo;
+
     FRadioNode: TJsonNode;
     FRadio:TRadio;
     FItemIndex: Integer;
@@ -129,7 +127,7 @@ begin
   Slider1.BorderColor := clScrollBar;
   Slider1.BarColor := clScrollBar;
   Slider1.SetParams(0,100,50);
-  Init;
+ // Init;
 end;
 
 procedure TMainForm.RenderTimerTimer(Sender: TObject);
@@ -213,6 +211,7 @@ procedure TMainForm.RadioListDrawItem(Sender: TObject; Surface: ISurface;
   Index: Integer; Rect: TRectI; State: TDrawState);
 var R, RR: TRectF; SelR, ImgRect: TRectI; F: IFont; C: TColorB;
     P: IPen; i : Integer; Val : Single;  pos : Integer;
+
 begin
   (* fill back ground *)
   SelR:= Rect;
@@ -226,7 +225,7 @@ begin
   ImgRect := SelR;
   ImgRect.Left:=+10;
   ImgRect.Right:=ImgRect.Left+60;
-  Image.Draw(Surface,Index,ImgRect);
+  FRadioInfo[Index].FListPicture.Draw(Surface,FRadioInfo[Index].FListPicture.ClientRect,ImgRect);
 
   (* render peaks *)
   PeakRect := SelR;
@@ -350,7 +349,6 @@ var i, j: integer;
     svg: TBGRASVG;
     ms: TMemoryStream;
     bmp: TBGRABitmap;
-    SurfaceBmp: TSurfaceBitmap;
 begin
   try
   for i:= 0 to FRadioNode.Find('result/stations').Count-1 do
@@ -370,28 +368,29 @@ begin
       FNew := FRadioNode.Find(StatioPath + IntToStr(i) + '/new').AsBoolean;
       FStream_64 := FRadioNode.Find(StatioPath + IntToStr(i) + '/stream_64').AsString;
       FStream_128 := FRadioNode.Find(StatioPath + IntToStr(i) + '/stream_128').AsString;
+      FListPicture := TSurfaceBitmap.Create;
     end;
   end;
   finally
     RadioList.Count:=Length(FRadioInfo);
   end;
-  bmp:= TBGRABitmap.Create;
-  SurfaceBmp := TSurfaceBitmap.Create;
-
   for i:= 0 to RadioList.Count -1 do
   begin
     ms:= TMemoryStream.Create;
+    bmp:= TBGRABitmap.Create;
 
     try
       s:= FRadioInfo[i].FSvg_outline;
       ms.WriteBuffer(s[1],Length(s));
       ms.Position:= 0;
 
-      svg:= TBGRASVG.Create(ms);
-      svg.ContainerWidthAsPixel := 200;
-      svg.ContainerHeightAsPixel := 200;
-      bmp.SetSize(Round(svg.WidthAsPixel),Round(svg.HeightAsPixel));
 
+      svg:= TBGRASVG.Create(ms);
+      svg.ContainerWidthAsPixel := 64;//200;
+      svg.ContainerHeightAsPixel := 64;//200;
+
+      bmp.SetSize(64,64);
+      ///bmp.SetSize(Round(svg.WidthAsPixel),Round(svg.HeightAsPixel));
       bmp.Fill(clMenuBar);
 
       for j:=0 to svg.Content.ElementCount-1  do
@@ -399,26 +398,14 @@ begin
         if svg.Content.IsSVGElement[j] then svg.Content.Element[j].fillColor := clMenuText;
       end;
       svg.StretchDraw(bmp.Canvas2D, 0,0,bmp.Width,bmp.Height);
-      {$ifdef Linux}
-      SurfaceBmp.SetSize(bmp.Width,bmp.Height);
-      SurfaceBmp.Assign(bmp.Bitmap);
-      Image.Add(SurfaceBmp);
-      {$else}
-      SurfaceBmp.SetSize(bmp.Width,bmp.Height);
-      SurfaceBmp.Assign(bmp.Bitmap);
-      Image.BeginUpdate;
-      Image.Add(SurfaceBmp);
-      Image.EndUpdate;
-      {$endif}
 
+      FRadioInfo[i].FListPicture.Assign(bmp.Bitmap);
     finally
       svg.Free;
       ms.free;
+      bmp.Free;
     end;
   end;
-
-  bmp.Free;
-  SurfaceBmp.Free;
 end;
 
 function TMainForm.NodeLoadFromUrl(const Url: string; Node: TJsonNode): Boolean;
@@ -469,7 +456,11 @@ begin
     FRadio.SetStatusProc(@StatusProc);
     FRadio.SetBroadcastMetaProc(@BroadcastMetaProc);
   finally
+    try
     FillRadioList;
+    finally
+    RadioList.Enabled:=True;
+    end;
   end;
 
 end;

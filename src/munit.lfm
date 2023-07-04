@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = 385
+  Left = 516
   Height = 500
-  Top = 201
+  Top = 213
   Width = 550
   Caption = 'unRecord'
   ClientHeight = 500
@@ -36,6 +36,7 @@ object MainForm: TMainForm
       Align = alClient
       BorderStyle = bsSingle
       DesktopFont = True
+      Enabled = False
       HotTrack = False
       ItemHeight = 64
       MultiSelect = False
@@ -288,14 +289,6 @@ object MainForm: TMainForm
       OnRender = SongRenderRender
       Align = alClient
     end
-  end
-  object Image: TImageStrip
-    Left = 80
-    Top = 64
-  end
-  object ImagePeak: TImageStrip
-    Left = 80
-    Top = 120
   end
   object TrayIcon: TTrayIcon
     PopUpMenu = TrayMenu
